@@ -1,6 +1,9 @@
 package main
 
+import (
+	"go_proxy/proxy"
+)
+
 func main() {
-	proxy.serveProxy()
-	
+	proxy.ServeProxy()
 }

@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func serveProxy() {
+func ServeProxy() {
 	http.HandleFunc("/", rootHandler)
 }
 
