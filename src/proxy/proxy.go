@@ -14,5 +14,6 @@ func ServeProxy() {
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r.Method)
 	fmt.Fprint(w, "hello")
 }
