@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"io/ioutil"
 )
 
 func ServeProxy() {
@@ -15,5 +16,17 @@ func ServeProxy() {
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r.Method)
-	fmt.Fprint(w, "hello")
+	distPort := 28888
+	requestURL := fmt.Sprintf("http://localhost:%d", distPort)
+	res, err := http.Get(requestURL)
+	if err != nil {
+		log.Fatal(err)
+	}
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("dist response code: %s\n", string(body))
+	proxyRes := "hello, " + string(body)
+	fmt.Fprint(w, proxyRes)
 }
